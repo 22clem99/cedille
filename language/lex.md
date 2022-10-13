@@ -1,10 +1,13 @@
 # Reserved keywords
 
-'égal' 'plus' 'moins' 'fois' 'divisé' 'modulo' 'et' 'ou' 'non' 'plus' 'grand' 'petit' 'tant' 'que' 'faire' 'alors'
+'égal' 'plus' 'moins' 'fois' 'divisé' 'modulo' 'et' 'ou' 'non' 'plus' 'grand' 'petit' 'tant' 'que' 'faire' 'alors' 'vrai' 'faux' 'flotant' 'entier' 'chaîne' 'différent' 
+
+*Kept for future features*
+'entrée' 'sortie' 'fonction' 'structure'
 
 # Identifier
 
-LETTER = 'a' + ... + 'z' + 'A' + ... + 'Z' + 'é' + 'É' + 'é' + 'È' + 'ê' + 'Ê' + 'ë' + 'Ë' + 'à' + 'À' + 'â' + 'Â' + 'ä' + 'Ä' + 'ù' + 'Ù' + 'ü' + 'Ü' + 'û' + 'Û' + 'î' + 'Î' + 'ï' + 'Ï' + 'ç' + 'Ç'
+LETTER = 'a' + ... + 'z' + 'A' + ... + 'Z' + 'é' + 'É' + 'è' + 'È' + 'ê' + 'Ê' + 'ë' + 'Ë' + 'à' + 'À' + 'â' + 'Â' + 'ä' + 'Ä' + 'ù' + 'Ù' + 'ü' + 'Ü' + 'û' + 'Û' + 'î' + 'Î' + 'ï' + 'Ï' + 'ç' + 'Ç'
 
 DIGIT = '0' + ... + '9'
 

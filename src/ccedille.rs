@@ -118,6 +118,8 @@ pub const ID_TERMINAL_FLOAT: u32 = 0x0030;
 pub const ID_TERMINAL_EOL: u32 = 0x0031;
 /// The unique identifier for terminal STRING
 pub const ID_TERMINAL_STRING: u32 = 0x0032;
+/// The unique identifier for terminal COMMENT
+pub const ID_TERMINAL_COMMENT: u32 = 0x0033;
 
 /// The unique identifier for the default context
 pub const CONTEXT_DEFAULT: u16 = 0;
@@ -175,7 +177,8 @@ const TERMINALS: &[Symbol] = &[
     Symbol { id: 0x002F, name: "DEC" },
     Symbol { id: 0x0030, name: "FLOAT" },
     Symbol { id: 0x0031, name: "EOL" },
-    Symbol { id: 0x0032, name: "STRING" }];
+    Symbol { id: 0x0032, name: "STRING" },
+    Symbol { id: 0x0033, name: "COMMENT" }];
 
 /// Creates a new lexer
 fn new_lexer<'a>(
@@ -190,15 +193,15 @@ fn new_lexer<'a>(
 const PARSER_AUTOMATON: &[u8] = include_bytes!("CCedilleParser.bin");
 
 /// The unique identifier for variable inst
-pub const ID_VARIABLE_INST: u32 = 0x0033;
+pub const ID_VARIABLE_INST: u32 = 0x0034;
 
 
 /// The collection of variables matched by this parser
 /// The variables are in an order consistent with the automaton,
 /// so that variable indices in the automaton can be used to retrieve the variables in this table
 const VARIABLES: &[Symbol] = &[
-    Symbol { id: 0x0033, name: "inst" },
-    Symbol { id: 0x0034, name: "__VAxiom" }];
+    Symbol { id: 0x0034, name: "inst" },
+    Symbol { id: 0x0035, name: "__VAxiom" }];
 
 /// The collection of virtuals matched by this parser
 /// The virtuals are in an order consistent with the automaton,
@@ -288,6 +291,7 @@ pub trait Visitor {
     fn on_terminal_float(&self, _node: &AstNode) {}
     fn on_terminal_eol(&self, _node: &AstNode) {}
     fn on_terminal_string(&self, _node: &AstNode) {}
+    fn on_terminal_comment(&self, _node: &AstNode) {}
     fn on_variable_inst(&self, _node: &AstNode) {}
 }
 
@@ -353,7 +357,8 @@ pub fn visit_ast_node<'a>(node: AstNode<'a>, visitor: &dyn Visitor) {
         0x0030 => visitor.on_terminal_float(&node),
         0x0031 => visitor.on_terminal_eol(&node),
         0x0032 => visitor.on_terminal_string(&node),
-        0x0033 => visitor.on_variable_inst(&node),
+        0x0033 => visitor.on_terminal_comment(&node),
+        0x0034 => visitor.on_variable_inst(&node),
         _ => ()
     };
 }

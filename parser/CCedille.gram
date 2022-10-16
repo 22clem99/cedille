@@ -82,19 +82,20 @@ grammar CCedille
                . - (U+0022 | U+005C | U+000A | U+000D)
                |  ub{BasicLatin}
                )+ '"' ;
+        // MULTI_LINE_STRING -> '"' (STRING_CAR | EOL)* '"';
 
-        STRING -> '"' (
+        COMMENT -> (
                . - (U+0022 | U+005C | U+000A | U+000D)
                |  ub{BasicLatin}
-               )+ '"' ;
-        // MULTI_LINE_STRING -> '"' (STRING_CAR | EOL)* '"';
+               )+ '|';
     }
     rules
     {
         inst -> FLOAT
             | S_INT
             | IDENT
-            | STRING;
+            | STRING
+            | COMMENT;
             // | MULTI_LINE_STRING;
     }
 }

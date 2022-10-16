@@ -10,7 +10,7 @@ use std::io;
 fn main() {
     env::set_var("RUST_BACKTRACE", "1");
 
-    let result = ccedille::parse_string("\"azerty\"");
+    let result = ccedille::parse_string("azerty|");
     let ast = result.get_ast();
     let root = ast.get_root();
     print(root, Vec::<bool>::new());

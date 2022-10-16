@@ -1,9 +1,9 @@
 # Reserved keywords
 
-'égal' 'plus' 'moins' 'fois' 'divisé' 'modulo' 'et' 'ou' 'non' 'plus' 'grand' 'petit' 'tant' 'que' 'faire' 'alors' 'vrai' 'faux' 'flotant' 'entier' 'chaîne' 'différent' 
+'égal' 'plus' 'moins' 'fois' 'divisé' 'modulo' 'et' 'ou' 'non' 'grand' 'petit' 'tant' 'que' 'faire' 'alors' 'vrai' 'faux' 'flotant' 'entier' 'chaîne' 'différent' 'dans'
 
 *Kept for future features*
-'entrée' 'sortie' 'fonction' 'structure'
+'entrée' 'sortie' 'fonction' 'structure'  'importer'
 
 # Identifier
 
@@ -20,7 +20,11 @@ IDENT = (LETTER + '-')(LETTER + DIGIT + '-')*
 # Integers
 POSITIVE_DIGIT = '1' + ... + '9'
 
-INT = '-' + '0' + POSITIVE_DIGIT DIGIT*
+SIGN = ('-' | '+')?;
+
+U_INT = '0' + POSITIVE_DIGIT DIGIT*
+
+S_INT = SIGN U_INT
 
 # Float
 NUM = POSITIVE_DIGIT DIGIT+

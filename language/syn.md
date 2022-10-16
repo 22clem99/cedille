@@ -20,9 +20,9 @@ inst_block
     | '-'* inst
 
 if_then_else
-    | 'si' '(' expr ')'
+    | 'si' expr 'alors'
       inst_block
-      ('si' 'sinon' '(' expr ')'
+      ('sinon' 'si' expr 'alors'
       inst_block)*
       ('sinon'
       list_inst)?

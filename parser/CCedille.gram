@@ -1,0 +1,100 @@
+grammar CCedille
+{
+    options
+    {
+        Axiom = "inst"; // the top variable for this grammar
+        Separator = "SEPARATOR"; // the terminal that represent white space
+    }
+    terminals
+    {
+        //~~~KEYWORDS~~~//
+        EGAL        -> 'égal';
+        PLUS        -> 'plus';
+        MOINS       -> 'moins';
+        FOIS        -> 'fois';
+        DIVISE      -> 'divise';
+        MODULO      -> 'modulo';
+        ET          -> 'et';
+        OU          -> 'ou';
+        NON         -> 'non';
+        GRAND       -> 'grand';
+        PETIT       -> 'petit';
+        TANT        -> 'tant';
+        QUE         -> 'que';
+        FAIRE       -> 'faire';
+        ALORS       -> 'alors';
+        VRAI        -> 'vrai';
+        FAUX        -> 'faux';
+        FLOTANT     -> 'flotant';
+        ENTIER      -> 'entier';
+        CHAINE      -> 'chaîne';
+        DIFFERENT   -> 'différent';
+        DANS        -> 'dans';
+
+        // Kept for future features
+        ENTREE      -> 'entrée';
+        SORTIE      -> 'sortie';
+        FONCTION    -> 'fonction';
+        STRUCTURE   -> 'structure';
+        IMPORTER    -> 'importer';
+
+        //Symbols    
+        OBRACE -> '{';
+        CBRACE -> '}';
+        OPARENT -> '(';
+        CPARENT -> ')';
+        SEMI -> ';';
+        COMMA -> ',';
+        SLASH -> '/';
+        PERCENT -> '%';
+        EXCLAM -> '!';
+        DOT -> '.';
+
+        WHITE_SPACE -> U+0020 | U+0009 | U+000B | U+000C ;
+        SEPARATOR   -> WHITE_SPACE+;
+
+        LETTER -> [a-z] | [A-Z] 
+                | U+00C0 | U+00C2 | U+00C4 | U+00E0 | U+00E2 | U+00E4 // A
+                | U+00C8 | U+00C9 | U+00CA | U+00CB | U+00E8 | U+00E9 | U+00EA | U+00EB // E
+                | U+00C7 | U+00E7 // ç
+                | U+00D9 | U+00DB | U+00DC | U+00F9 | U+00FB | U+00FC // U
+                | U+00CE | U+00CF | U+00EE | U+00EF; // I
+
+        DIGIT -> [0-9];
+
+        IDENT -> (LETTER)(LETTER | DIGIT | '-')*;
+    
+        // for integer
+        POSITIVE_DIGIT -> [1-9];
+        
+        S_INT -> ('-' | '+')? ('0' | POSITIVE_DIGIT DIGIT*);
+
+        // for float
+        DEC -> ('0' | POSITIVE_DIGIT DIGIT*) ',' DIGIT DIGIT*;
+
+        FLOAT -> ('-' | '+')? DEC;
+
+        // for String
+        EOL -> '\n';
+
+
+        STRING -> '"' (
+               . - (U+0022 | U+005C | U+000A | U+000D)
+               |  ub{BasicLatin}
+               )+ '"' ;
+
+        STRING -> '"' (
+               . - (U+0022 | U+005C | U+000A | U+000D)
+               |  ub{BasicLatin}
+               )+ '"' ;
+        // MULTI_LINE_STRING -> '"' (STRING_CAR | EOL)* '"';
+    }
+    rules
+    {
+        inst -> FLOAT
+            | S_INT
+            | IDENT
+            | STRING;
+            // | MULTI_LINE_STRING;
+    }
+}
